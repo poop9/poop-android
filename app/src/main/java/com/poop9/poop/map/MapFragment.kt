@@ -7,6 +7,12 @@ import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationSet
+import android.view.animation.AnimationUtils
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
@@ -25,6 +31,9 @@ import kotlinx.android.synthetic.main.fragment_map.*
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import pub.devrel.easypermissions.EasyPermissions
+import kotlin.random.Random
+
+
 
 
 @SuppressLint("MissingPermission")
@@ -92,7 +101,11 @@ class MapFragment : BaseFragment() {
         map_screen.setOnClickListener {
             if (activate) {
                 screenTouch()
+                for (i in 1..10) {
+                    showPoopText()}
+                showPoopImage()
             }
+
         }
     }
 
@@ -138,7 +151,7 @@ class MapFragment : BaseFragment() {
             mapDelegate.changeCamera(locationData)
             mapDelegate.placeMyMark(locationData)
 
-            for (i in 1..10) {
+            for (i in 1..20) {
                 mapDelegate.placePoopMark(randomLocationDataFrom(locationData))
             }
         }
@@ -151,10 +164,79 @@ class MapFragment : BaseFragment() {
         )
     }
 
+    val width = 1100
+    val height = 300
+    private fun showPoopText(){
+
+        //create Image
+        val textView = TextView(context)
+        textView.text = "POOP"
+
+        //random location
+        val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+        layoutParams.setMargins(Random.nextInt(width), Random.nextInt(height),0,0)
+        textView.layoutParams = layoutParams
+        map_screen_show_poop.addView(textView)
+        map_screen_show_poop.invalidate()
+
+        //load animation
+        val animation = AnimationSet(true)
+        animation.addAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out_zoom_out))
+        textView.animation = animation
+        animation.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationRepeat(animation: Animation?) {
+            }
+
+            override fun onAnimationStart(animation: Animation?) {
+            }
+
+            override fun onAnimationEnd(animation: Animation?) {
+                textView.visibility = View.GONE
+                map_screen_show_poop.invalidate()
+            }
+            // All the other override functions
+        })
+    }
+    /**
+     * show Poop and auto fade out
+     */
+    private fun showPoopImage() {
+
+        //create Image
+        val imageView = ImageView(context)
+        imageView.setImageResource(R.drawable.img_poop)
+
+        //random location
+        val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+        layoutParams.setMargins(Random.nextInt(width), Random.nextInt(height),0,0)
+        imageView.layoutParams = layoutParams
+        map_screen_show_poop.addView(imageView)
+        map_screen_show_poop.invalidate()
+
+        //load animation
+        val animation = AnimationSet(true)
+        animation.addAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out_zoom_out))
+        imageView.animation = animation
+        animation.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationRepeat(animation: Animation?) {
+            }
+
+            override fun onAnimationStart(animation: Animation?) {
+            }
+
+            override fun onAnimationEnd(animation: Animation?) {
+                imageView.visibility = View.GONE
+                map_screen_show_poop.invalidate()
+            }
+            // All the other override functions
+        })
+    }
+
     private fun screenTouch() {
         val activity = activity as MainActivity
         lifecycleScope.launch {
-            activity.attemptSend2() }
+            activity.attemptSend2()
+        }
     }
 
     private fun makeRandomRange() = Math.random() * 0.02 - 0.01

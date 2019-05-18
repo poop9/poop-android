@@ -13,6 +13,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+        <LinearLayout
+            android:id="@+id/map_screen_show_poop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"/>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/map_screen"
             android:layout_width="match_parent"
