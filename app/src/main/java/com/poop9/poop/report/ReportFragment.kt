@@ -5,12 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.poop9.poop.R
+import com.poop9.poop.data.api.PoopRepository
 import com.poop9.poop.vo.RankData
 import kotlinx.android.synthetic.main.fragment_report.*
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 
 
 class ReportFragment : Fragment() {
+
+    private val repo: PoopRepository by inject()
+
     val daysEN = listOf("MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN")
     val daysKR = listOf("월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일")
 
@@ -24,15 +31,16 @@ class ReportFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        loadChart()
-        loadRankList()
-        loadBestActivePoop()
+        lifecycleScope.launch {
+            loadChart()
+            loadRankList()
+            loadBestActivePoop() }
     }
 
-    private fun loadChart(){
-        report_title_daily_value.text = String.format("%s회", mockValueDaily())
-        report_title_weekly_value.text = String.format("%s회", mockValueWeekly())
-        report_title_monthly_value.text = String.format("%s회", mockValueMonthly())
+    private suspend fun loadChart(){
+        report_title_daily_value.text = String.format("%s회", valueDaily())
+        report_title_weekly_value.text = String.format("%s회", valueWeekly())
+        report_title_monthly_value.text = String.format("%s회", valueMonthly())
     }
 
     private fun loadRankList(){
@@ -72,6 +80,18 @@ class ReportFragment : Fragment() {
     private fun mockActivePoopDay(): String{
         return "WED"
     }
+
+
+    private suspend fun valueDaily(): Int{
+        return repo.today().count
+    }
+    private suspend fun valueWeekly(): Int{
+        return repo.week().count
+    }
+    private suspend fun valueMonthly(): Int{
+        return repo.month().count
+    }
+
     private fun mockValueDaily(): Int{
         return 4
     }
@@ -81,42 +101,4 @@ class ReportFragment : Fragment() {
     private fun mockValueMonthly(): Int{
         return 78
     }
-    /*
-    private fun testChart() {
-        val entries = ArrayList<Entry>()
-        entries.add(Entry(0f, 1f))
-        entries.add(Entry(1f, 2f))
-        entries.add(Entry(2f, 3f))
-        entries.add(Entry(3f, 4f))
-
-        val lineDataSet = LineDataSet(entries, "total")// entries와 지정할 label을 생성자에 넘겨준다.
-        lineDataSet.lineWidth = 2f // 선 굵기
-        lineDataSet.circleRadius = 6f // 곡률
-        lineDataSet.setCircleColor(ContextCompat.getColor(context!!, R.color.lightish_blue))
-        lineDataSet.circleHoleColor = ContextCompat.getColor(context!!, R.color.lightish_blue)
-        lineDataSet.color = ContextCompat.getColor(context!!, R.color.lightish_blue)
-
-
-        val lineData = LineData(lineDataSet)
-
-        // 여기에 라인 데이터의 텍스트 컬러, 사이즈를 설정할 수 있다.
-
-        lineData.setValueTextColor(ContextCompat.getColor(context!!, R.color.black))
-        lineData.setValueTextSize(9f)
-        report_chart_00.data = lineData
-        report_chart_00.invalidate()
-    }
-
-    private fun mockMonthlyData(){
-        val entries = mutableListOf<BarEntry>()
-        entries.add(BarEntry(0f,30f))
-
-        val set = BarDataSet(entries, "BarDataSet")
-        val data = BarData(set)
-
-        report_chart_01.data = data
-        report_chart_01.setFitBars(true) // make the x-axis fit exactly all bars
-        report_chart_01.invalidate() // refresh
-    }
-    */
 }

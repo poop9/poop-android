@@ -10,12 +10,15 @@ import androidx.lifecycle.observe
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.SupportMapFragment
-import com.poop9.poop.R
 import com.poop9.poop.base.BaseFragment
 import com.poop9.poop.databinding.FragmentMapBinding
 import com.poop9.poop.getViewModel
 import com.poop9.poop.model.LocationData
 import pub.devrel.easypermissions.EasyPermissions
+import com.poop9.poop.MainActivity
+import com.poop9.poop.R
+import kotlinx.android.synthetic.main.fragment_map.*
+
 
 @SuppressLint("MissingPermission")
 class MapFragment : BaseFragment() {
@@ -54,6 +57,9 @@ class MapFragment : BaseFragment() {
         vm.location.observe(this) { locationData ->
             loadMap(locationData)
         }
+        binding.poopStartFab.setOnClickListener{screenTouch()}
+
+        map_screen.setOnClickListener{screenTouch()}
     }
 
     private fun getLocationClient(): FusedLocationProviderClient {
@@ -79,6 +85,11 @@ class MapFragment : BaseFragment() {
             makeRandomRange(),
             makeRandomRange()
         )
+    }
+
+    private fun screenTouch(){
+        val activity = activity as MainActivity
+        activity.attemptSend()
     }
 
     private fun makeRandomRange() = Math.random() * 0.02 - 0.01
