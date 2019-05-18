@@ -24,7 +24,7 @@ class PoopRepositoryImpl(
     }
 
     private fun token(): String {
-        return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiMmY0OGYyNDEtOWQ2NC00ZDE2LWJmNTYtNzBiOWQ0ZTBlNzlhIiwibmlja25hbWUiOiJoZWV3b24iLCJpYXQiOjE1NTgyMDQ0NDUsImV4cCI6MTU2MDc5NjQ0NX0.emRjXgTMuD5hT58l55G5D0muzozIEDjmcGIUX3ax5cQ"
+        return pref.getString(KEY_TOKEN, "")
     }
 
     override suspend fun today(): ReportCountResponse {
