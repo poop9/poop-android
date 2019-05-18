@@ -10,6 +10,7 @@ import com.poop9.poop.R
 import com.poop9.poop.data.api.PoopRepository
 import com.poop9.poop.vo.RankData
 import kotlinx.android.synthetic.main.fragment_report.*
+import org.koin.android.ext.android.inject
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
@@ -31,25 +32,26 @@ class ReportFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        lifecycleScope.launch {
+        lifecycleScope.launchWhenStarted {
             loadChart()
             loadRankList()
-            loadBestActivePoop() }
+            loadBestActivePoop()
+        }
     }
 
-    private suspend fun loadChart(){
-        report_title_daily_value.text = String.format("%s회", valueDaily())
-        report_title_weekly_value.text = String.format("%s회", valueWeekly())
-        report_title_monthly_value.text = String.format("%s회", valueMonthly())
+    private suspend fun loadChart() {
+        report_title_daily_value.text = String.format("%s회", mockValueDaily())
+        report_title_weekly_value.text = String.format("%s회", mockValueWeekly())
+        report_title_monthly_value.text = String.format("%s회", mockValueMonthly())
     }
 
-    private fun loadRankList(){
+    private suspend fun loadRankList() {
         val rankAdapter = ReportRankAdapter(context!!, mockRankList())
         report_rank_list.adapter = rankAdapter
     }
 
-    private fun loadBestActivePoop(){
-        when(mockActivePoopDay()){
+    private fun loadBestActivePoop() {
+        when (mockActivePoopDay()) {
             "MON" -> report_title_pattern_date.text = getString(R.string.report_mon)
             "TUE" -> report_title_pattern_date.text = getString(R.string.report_tue)
             "WED" -> report_title_pattern_date.text = getString(R.string.report_wed)
@@ -60,7 +62,7 @@ class ReportFragment : Fragment() {
         }
     }
 
-    private fun mockRankList() : List<RankData>{
+    private suspend fun mockRankList(): List<RankData> {
 
         val list = listOf(
             RankData(1, "GROOT1", 100)
@@ -74,10 +76,12 @@ class ReportFragment : Fragment() {
             , RankData(9, "GROOT", 100)
             , RankData(10, "ALAN", 100)
         )
-        return list
+        return repo.list().map { response ->
+            RankData(response.rank, response.nickname, response.count)
+        }
     }
 
-    private fun mockActivePoopDay(): String{
+    private fun mockActivePoopDay(): String {
         return "WED"
     }
 
@@ -92,13 +96,15 @@ class ReportFragment : Fragment() {
         return repo.month().count
     }
 
-    private fun mockValueDaily(): Int{
-        return 4
+    private suspend fun mockValueDaily(): Int {
+        return repo.today().count
     }
-    private fun mockValueWeekly(): Int{
-        return 12
+
+    private suspend fun mockValueWeekly(): Int {
+        return repo.week().count
     }
-    private fun mockValueMonthly(): Int{
-        return 78
+
+    private suspend fun mockValueMonthly(): Int {
+        return repo.month().count
     }
 }
