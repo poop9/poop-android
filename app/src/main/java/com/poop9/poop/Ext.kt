@@ -9,6 +9,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.get
 
 fun <T : ViewDataBinding> Activity.bind(@LayoutRes layoutId: Int, initializer: (T.() -> Unit)? = null): T =
     DataBindingUtil.setContentView<T>(this, layoutId).apply {
@@ -49,3 +53,12 @@ fun FragmentActivity.replace(@IdRes containerId: Int, fragment: Fragment) {
 fun Activity.toast(message: String, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, message, duration).show()
 }
+
+/**
+ * 뷰모델..
+ */
+inline fun <reified T : ViewModel> FragmentActivity.getViewModel(vmf: ViewModelProvider.Factory? = null) =
+    ViewModelProviders.of(this, vmf).get<T>()
+
+inline fun <reified T : ViewModel> Fragment.getViewModel(vmf: ViewModelProvider.Factory? = null) =
+    ViewModelProviders.of(this, vmf).get<T>()
