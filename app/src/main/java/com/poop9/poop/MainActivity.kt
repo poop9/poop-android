@@ -30,6 +30,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showReportFragment() {
-        replace(R.id.fragment_container, DummyFragment2())
+        replace(R.id.fragment_container, ReportFragment())
     }
 }

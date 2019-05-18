@@ -1,10 +1,12 @@
 package com.poop9.poop.onboarding
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.poop9.poop.MainActivity
 import com.poop9.poop.R
 import kotlinx.android.synthetic.main.fragment_onboarding.*
 
@@ -23,6 +25,10 @@ open class OnboardingFragment : Fragment() {
     }
 
     private fun onboardingStart(){
+        val intent = Intent(activity, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+        startActivity(intent)
         activity!!.finish()
     }
 }
