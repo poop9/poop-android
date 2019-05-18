@@ -3,8 +3,10 @@ package com.poop9.poop.map
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.observe
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -23,8 +25,9 @@ class MapFragment : BaseFragment() {
         get() = R.layout.fragment_map
 
     private lateinit var mapDelegate: MapDelegate
-
     private lateinit var binding: FragmentMapBinding
+
+    private var activate: Boolean = false
 
     private val vm by lazy { getViewModel<MapViewModel>() }
 
@@ -49,11 +52,49 @@ class MapFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMapBinding.bind(view)
 
+        binding.poopStartFab.setOnClickListener {
+            if (!activate) {
+                activate()
+            } else {
+                deactivate()
+            }
+        }
+
         vm.start(getLocationClient())
 
         vm.location.observe(this) { locationData ->
             loadMap(locationData)
         }
+    }
+
+    private fun activate() {
+        binding.poopStartFab.supportBackgroundTintList =
+            ColorStateList.valueOf(
+                ResourcesCompat.getColor(resources, R.color.lightish_blue, null)
+            )
+        binding.poopStartFab.supportImageTintList =
+            ColorStateList.valueOf(
+                ResourcesCompat.getColor(resources, R.color.white, null)
+            )
+        binding.poopStartFab.rippleColor =
+            ResourcesCompat.getColor(resources, R.color.white, null)
+        binding.poopLabel.visibility = View.VISIBLE
+        activate = true
+    }
+
+    private fun deactivate() {
+        binding.poopStartFab.supportBackgroundTintList =
+            ColorStateList.valueOf(
+                ResourcesCompat.getColor(resources, R.color.white, null)
+            )
+        binding.poopStartFab.supportImageTintList =
+            ColorStateList.valueOf(
+                ResourcesCompat.getColor(resources, R.color.black, null)
+            )
+        binding.poopStartFab.rippleColor =
+            ResourcesCompat.getColor(resources, R.color.lightish_blue, null)
+        binding.poopLabel.visibility = View.INVISIBLE
+        activate = false
     }
 
     private fun getLocationClient(): FusedLocationProviderClient {
