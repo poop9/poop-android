@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.poop9.poop.databinding.ActivityMainBinding
+import com.poop9.poop.map.MapFragment
 
 class MainActivity : AppCompatActivity() {
 

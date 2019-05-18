@@ -1,4 +1,4 @@
-package com.poop9.poop
+package com.poop9.poop.map
 
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.annotation.SuppressLint
@@ -17,6 +17,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.CameraPosition
+import com.poop9.poop.R
 import com.poop9.poop.base.BaseFragment
 import com.poop9.poop.databinding.FragmentMapBinding
 import com.poop9.poop.model.LocationData
