@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">poop-android</string>
+
+
+    <string name="report_title">통계</string>
+    <string name="report_title_semi">POOP 횟수</string>
+    <string name="report_weekly">주간</string>
+    <string name="report_monthly">월간</string>
 </resources>
