@@ -1,5 +1,6 @@
 package com.poop9.poop.data.api
 
+import com.poop9.poop.data.request.GpsRequest
 import com.poop9.poop.data.request.SignInRequest
 import com.poop9.poop.data.response.ReportCountResponse
 import com.poop9.poop.data.response.ReportRankResponse
@@ -44,4 +45,10 @@ interface PoopService {
     fun list(
         @Header("authorization") authorization: String
     ): Deferred<Response<List<ReportRankResponse>>>
+
+    @POST("api/gps")
+    fun gps(
+        @Body request: GpsRequest,
+        @Header("authorization") authorization: String
+    ): Deferred<Unit>
 }

@@ -5,21 +5,26 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.SupportMapFragment
+import com.poop9.poop.MainActivity
+import com.poop9.poop.R
 import com.poop9.poop.base.BaseFragment
+import com.poop9.poop.data.api.PoopRepository
 import com.poop9.poop.databinding.FragmentMapBinding
 import com.poop9.poop.getViewModel
 import com.poop9.poop.model.LocationData
-import pub.devrel.easypermissions.EasyPermissions
-import com.poop9.poop.MainActivity
-import com.poop9.poop.R
 import kotlinx.android.synthetic.main.fragment_map.*
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
+import pub.devrel.easypermissions.EasyPermissions
 
 
 @SuppressLint("MissingPermission")
@@ -33,6 +38,7 @@ class MapFragment : BaseFragment() {
     private var activate: Boolean = false
 
     private val vm by lazy { getViewModel<MapViewModel>() }
+    private val repo: PoopRepository by inject()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -58,6 +64,7 @@ class MapFragment : BaseFragment() {
         binding.poopStartFab.setOnClickListener {
             if (!activate) {
                 activate()
+                vm.sendGpsData()
             } else {
                 deactivate()
             }
@@ -65,12 +72,26 @@ class MapFragment : BaseFragment() {
 
         vm.start(getLocationClient())
 
-        vm.location.observe(this) { locationData ->
+        vm.initialize.observe(this) { locationData ->
             loadMap(locationData)
         }
-        binding.poopStartFab.setOnClickListener{screenTouch()}
 
-        map_screen.setOnClickListener{screenTouch()}
+        vm.sendGpsData.observe(this) { locationData ->
+            lifecycleScope.launch {
+                try {
+                    repo.gps(locationData)
+                    Log.e("asdf", "GPS Complete")
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+        }
+
+        map_screen.setOnClickListener {
+            if (activate) {
+                screenTouch()
+            }
+        }
     }
 
     private fun activate() {
@@ -128,7 +149,7 @@ class MapFragment : BaseFragment() {
         )
     }
 
-    private fun screenTouch(){
+    private fun screenTouch() {
         val activity = activity as MainActivity
         activity.attemptSend()
     }
