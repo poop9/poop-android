@@ -94,8 +94,6 @@ class MapFragment : BaseFragment() {
                 screenTouch()
             }
         }
-            binding.poopStartFab.setOnClickListener{screenTouch()}
-            map_screen.setOnClickListener{screenTouch()}
     }
 
     private fun activate() {
