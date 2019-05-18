@@ -9,11 +9,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.observe
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.maps.CameraUpdate
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.CameraPosition
 import com.poop9.poop.R
 import com.poop9.poop.base.BaseFragment
 import com.poop9.poop.databinding.FragmentMapBinding
@@ -21,13 +17,12 @@ import com.poop9.poop.getViewModel
 import com.poop9.poop.model.LocationData
 import pub.devrel.easypermissions.EasyPermissions
 
-
 @SuppressLint("MissingPermission")
 class MapFragment : BaseFragment() {
     override val layoutId: Int
         get() = R.layout.fragment_map
 
-    private lateinit var map: GoogleMap
+    private lateinit var mapDelegate: MapDelegate
 
     private lateinit var binding: FragmentMapBinding
 
@@ -69,21 +64,22 @@ class MapFragment : BaseFragment() {
     private fun loadMap(locationData: LocationData) {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync { googleMap ->
-            map = googleMap
-            map.mapType = GoogleMap.MAP_TYPE_NORMAL
-            map.isMyLocationEnabled = true
-            changeCamera(createCameraUpdate(locationData))
+            mapDelegate = MapDelegateImpl(googleMap)
+            mapDelegate.changeCamera(locationData)
+            mapDelegate.placeMyMark(locationData)
+
+            for (i in 1..10) {
+                mapDelegate.placePoopMark(randomLocationDataFrom(locationData))
+            }
         }
     }
 
-    private fun createCameraUpdate(locationData: LocationData): CameraUpdate =
-        CameraPosition.Builder()
-            .target(locationData.toLatLng())
-            .zoom(15f)
-            .build()
-            .let(CameraUpdateFactory::newCameraPosition)
-
-    private fun changeCamera(update: CameraUpdate) {
-        map.moveCamera(update)
+    private fun randomLocationDataFrom(locationData: LocationData): LocationData {
+        return locationData.translate(
+            makeRandomRange(),
+            makeRandomRange()
+        )
     }
+
+    private fun makeRandomRange() = Math.random() * 0.02 - 0.01
 }

@@ -17,4 +17,10 @@ data class LocationData(
     }
 
     fun toLatLng(): LatLng = LatLng(latitude, longitude)
+
+    fun translate(latitude: Double, longitude: Double): LocationData =
+        LocationData(
+            this.latitude + latitude,
+            this.longitude + longitude
+        )
 }
