@@ -24,27 +24,12 @@ class SplashActivity : BaseActivity() {
 
         lifecycleScope.launch {
             delay(timeSec.toLong())
-            val token = repo.getToken()
-            if (token.isEmpty()) {
-                // Token is empty - First user
-                gotoOnboarding()
-            } else {
-                gotoMain()
-            }
+            gotoOnboarding()
         }
     }
 
     private fun gotoOnboarding() {
         startActivity<OnboardingActivity> {
-            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        }
-
-        finish()
-        overridePendingTransition(R.anim.fade_start, R.anim.fade_end)
-    }
-
-    private fun gotoMain() {
-        startActivity<MainActivity> {
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         }
 

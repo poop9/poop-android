@@ -97,6 +97,5 @@ class OnboardingActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
 
     private fun moveToMain() {
         startActivity<MainActivity>()
-        finish()
     }
 }
