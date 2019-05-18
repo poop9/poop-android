@@ -14,16 +14,23 @@ class OnboardingPagerAdapter(fragmentManager: FragmentManager) :
             R.layout.fragment_onboarding,
             R.layout.fragment_onboarding
         )
+
+    private var onStartListener: () -> Unit = {}
+
     // 2
-    override fun getItem(position: Int): Fragment = when(position){
+    override fun getItem(position: Int): Fragment = when (position) {
         0 -> OnboardingFragment0()
         1 -> OnboardingFragment1()
-        2 -> OnboardingFragment2()
+        2 -> OnboardingFragment2().apply { attachOnStartListener(onStartListener) }
         else -> throw IllegalArgumentException()
     }
 
     // 3
     override fun getCount(): Int {
         return layoutIds.size
+    }
+
+    fun attachOnStartListener(listener: () -> Unit) {
+        onStartListener = listener
     }
 }
