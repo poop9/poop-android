@@ -17,6 +17,10 @@ class PoopRepositoryImpl(
         const val KEY_TOKEN = "token"
     }
 
+    override suspend fun getToken(): String {
+        return token()
+    }
+
     override suspend fun today(): ReportCountResponse {
         return service.today(token()).await().result
     }

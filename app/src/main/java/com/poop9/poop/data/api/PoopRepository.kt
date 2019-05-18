@@ -5,6 +5,7 @@ import com.poop9.poop.data.response.ReportRankResponse
 import com.poop9.poop.data.response.TokenResponse
 
 interface PoopRepository {
+    suspend fun getToken(): String
     suspend fun signUp(nickname: String): TokenResponse
     suspend fun signIn(): TokenResponse
     suspend fun today(): ReportCountResponse

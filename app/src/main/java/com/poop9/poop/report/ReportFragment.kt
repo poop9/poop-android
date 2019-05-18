@@ -5,14 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.poop9.poop.R
+import com.poop9.poop.data.api.PoopRepository
 import com.poop9.poop.vo.RankData
 import kotlinx.android.synthetic.main.fragment_report.*
+import org.koin.android.ext.android.inject
 
 
 class ReportFragment : Fragment() {
     val daysEN = listOf("MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN")
     val daysKR = listOf("월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일")
+
+    private val repo: PoopRepository by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,24 +29,26 @@ class ReportFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        loadChart()
-        loadRankList()
-        loadBestActivePoop()
+        lifecycleScope.launchWhenStarted {
+            loadChart()
+            loadRankList()
+            loadBestActivePoop()
+        }
     }
 
-    private fun loadChart(){
+    private suspend fun loadChart() {
         report_title_daily_value.text = String.format("%s회", mockValueDaily())
         report_title_weekly_value.text = String.format("%s회", mockValueWeekly())
         report_title_monthly_value.text = String.format("%s회", mockValueMonthly())
     }
 
-    private fun loadRankList(){
+    private suspend fun loadRankList() {
         val rankAdapter = ReportRankAdapter(context!!, mockRankList())
         report_rank_list.adapter = rankAdapter
     }
 
-    private fun loadBestActivePoop(){
-        when(mockActivePoopDay()){
+    private fun loadBestActivePoop() {
+        when (mockActivePoopDay()) {
             "MON" -> report_title_pattern_date.text = getString(R.string.report_mon)
             "TUE" -> report_title_pattern_date.text = getString(R.string.report_tue)
             "WED" -> report_title_pattern_date.text = getString(R.string.report_wed)
@@ -52,7 +59,7 @@ class ReportFragment : Fragment() {
         }
     }
 
-    private fun mockRankList() : List<RankData>{
+    private suspend fun mockRankList(): List<RankData> {
 
         val list = listOf(
             RankData(1, "GROOT1", 100)
@@ -66,20 +73,25 @@ class ReportFragment : Fragment() {
             , RankData(9, "GROOT", 100)
             , RankData(10, "ALAN", 100)
         )
-        return list
+        return repo.list().map { response ->
+            RankData(response.rank, response.nickname, response.count)
+        }
     }
 
-    private fun mockActivePoopDay(): String{
+    private fun mockActivePoopDay(): String {
         return "WED"
     }
-    private fun mockValueDaily(): Int{
-        return 4
+
+    private suspend fun mockValueDaily(): Int {
+        return repo.today().count
     }
-    private fun mockValueWeekly(): Int{
-        return 12
+
+    private suspend fun mockValueWeekly(): Int {
+        return repo.week().count
     }
-    private fun mockValueMonthly(): Int{
-        return 78
+
+    private suspend fun mockValueMonthly(): Int {
+        return repo.month().count
     }
     /*
     private fun testChart() {
