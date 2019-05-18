@@ -28,6 +28,10 @@ dependencies {
     implementation "androidx.appcompat:appcompat:1.0.2"
     implementation "androidx.core:core-ktx:1.0.2"
     implementation "androidx.constraintlayout:constraintlayout:${Version.constraintLayout}"
+    implementation "com.android.support:design:${Version.supportLibraryVersion}"
+    implementation "com.android.support:cardview-v7:${Version.supportLibraryVersion}"
+    implementation "com.android.support:gridlayout-v7:${Version.supportLibraryVersion}"
+    implementation "com.android.support:animated-vector-drawable:${Version.supportLibraryVersion}"
 
     implementation("com.google.android.material:material:${Version.material}")
 

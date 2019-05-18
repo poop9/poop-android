@@ -12,4 +12,6 @@
 
     <!--common-->
     <color name="lightish_blue">#416cf7</color>
+    <color name="lightish_blue_30">#4d416cf7</color>
+    <color name="light_periwinkle">#d8e1fe</color>
 </resources>
