@@ -4,6 +4,7 @@ import com.poop9.poop.data.request.SignInRequest
 import com.poop9.poop.data.response.ReportCountResponse
 import com.poop9.poop.data.response.ReportRankResponse
 import com.poop9.poop.data.response.SignInResponse
+import com.poop9.poop.data.response.TokenResponse
 import java.util.*
 
 class PoopRepositoryImpl(
@@ -11,24 +12,24 @@ class PoopRepositoryImpl(
 ) : PoopRepository {
 
     override suspend fun today(): ReportCountResponse {
-        return service.today().await()
+        return service.today().await().result
     }
 
     override suspend fun week(): ReportCountResponse {
-        return service.week().await()
+        return service.week().await().result
     }
 
     override suspend fun month(): ReportCountResponse {
-        return service.month().await()
+        return service.month().await().result
     }
 
     override suspend fun list() : List<ReportRankResponse>{
-        return service.list().await()
+        return service.list().await().result
     }
 
     private var nickname: String = ""
 
-    override suspend fun signUp(nickname: String): SignInResponse {
+    override suspend fun signUp(nickname: String): TokenResponse {
         this.nickname = nickname
 
         return service.signIn(
@@ -36,10 +37,10 @@ class PoopRepositoryImpl(
                 UUID.randomUUID().toString(),
                 nickname
             )
-        ).await()
+        ).await().result
     }
 
-    override suspend fun signIn(): SignInResponse {
+    override suspend fun signIn(): TokenResponse {
         if (nickname.isEmpty())
             throw IllegalStateException("Should sign up first.")
 
@@ -48,6 +49,6 @@ class PoopRepositoryImpl(
                 UUID.randomUUID().toString(),
                 nickname
             )
-        ).await()
+        ).await().result
     }
 }

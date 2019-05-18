@@ -3,6 +3,8 @@ object Version {
     val coroutine = "1.2.1"
     val constraintLayout = "1.1.3"
 
+    val koin = "2.0.0-GA6"
+
     val material = "1.1.0-alpha05"
     val supportLibraryVersion = "28.0.0"
 

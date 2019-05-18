@@ -1,13 +1,20 @@
 package com.poop9.poop
 
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
+import androidx.lifecycle.lifecycleScope
 import com.poop9.poop.base.BaseActivity
+import com.poop9.poop.data.api.PoopRepository
 import com.poop9.poop.databinding.ActivityMainBinding
 import com.poop9.poop.map.MapFragment
 import com.poop9.poop.report.ReportFragment
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 
 class MainActivity : BaseActivity() {
+
+    private val repo: PoopRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,8 +37,14 @@ class MainActivity : BaseActivity() {
         return true
     }
 
-    private fun showLoginDialog(){
-        val dialog = LoginDialog()
+    private fun showLoginDialog() {
+        val dialog = LoginDialog().onLogin { nickname ->
+            lifecycleScope.launch {
+                val tokenResult = repo.signUp(nickname)
+                Log.e("MainActivity", tokenResult.token)
+            }
+        }
+
         showDialogFragment(dialog, "Login")
     }
 
