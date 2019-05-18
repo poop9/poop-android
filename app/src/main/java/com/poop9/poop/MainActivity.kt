@@ -24,7 +24,9 @@ class MainActivity : SocketActivity() {
 
         showMapFragment()
 
-        showLoginDialogWhenFirst()
+        lifecycleScope.launch {
+            showLoginDialogWhenFirst()
+        }
     }
 
     private fun handleMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -37,8 +39,9 @@ class MainActivity : SocketActivity() {
         return true
     }
 
-    private fun showLoginDialogWhenFirst() {
-        showLoginDialog()
+    private suspend fun showLoginDialogWhenFirst() {
+        if (repo.getToken().isEmpty())
+            showLoginDialog()
     }
 
     private fun showLoginDialog() {
