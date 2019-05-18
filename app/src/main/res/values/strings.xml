@@ -8,6 +8,9 @@
     <string name="report_title_semi">POOP 횟수</string>
     <string name="report_weekly">주간</string>
     <string name="report_monthly">월간</string>
+    <string name="report_top10">POOP 순위</string>
+    <string name="report_pattern">배변 패턴 분석</string>
+    <string name="report_pattern_date">당신의 장이 가장 활발한 요일은?</string>
 
     <!--onboarding-->
     <string name="onboarding_skip">SKIP</string>
