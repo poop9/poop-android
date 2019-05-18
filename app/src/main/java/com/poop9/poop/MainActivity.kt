@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         when (menuItem.itemId) {
             R.id.main_map -> showMapFragment()
             R.id.main_report -> showReportFragment()
+            else -> return false
         }
 
         return true
