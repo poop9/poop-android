@@ -1,18 +1,19 @@
 package com.poop9.poop.onboarding
 
 import android.Manifest.permission.ACCESS_FINE_LOCATION
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.tabs.TabLayout
 import com.poop9.poop.MainActivity
 import com.poop9.poop.R
+import com.poop9.poop.base.BaseActivity
 import com.poop9.poop.startActivity
 import kotlinx.android.synthetic.main.activity_onboarding.*
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 
-class OnboardingActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
+class OnboardingActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
 
     companion object {
         const val LOCATION_PERMISSION_REQUEST_CODE = 1
@@ -42,8 +43,12 @@ class OnboardingActivity : AppCompatActivity(), EasyPermissions.PermissionCallba
         tabLayout.setupWithViewPager(onboarding_viewpager)
     }
 
-    private fun onboardingSkip() {
+    open fun onboardingSkip(){
+        val intent = Intent(this, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent)
         finish()
+        overridePendingTransition(R.anim.fade_start, R.anim.fade_end)
     }
 
     @AfterPermissionGranted(LOCATION_PERMISSION_REQUEST_CODE)

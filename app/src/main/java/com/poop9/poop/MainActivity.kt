@@ -2,13 +2,14 @@ package com.poop9.poop
 
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
+
 import androidx.fragment.app.Fragment
+import com.poop9.poop.base.BaseActivity
 import com.poop9.poop.databinding.ActivityMainBinding
 import com.poop9.poop.map.MapFragment
+import com.poop9.poop.report.ReportFragment
 
-
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

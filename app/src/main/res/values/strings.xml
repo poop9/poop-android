@@ -6,8 +6,22 @@
 
     <string name="report_title">통계</string>
     <string name="report_title_semi">POOP 횟수</string>
+    <string name="report_daily">일간</string>
     <string name="report_weekly">주간</string>
     <string name="report_monthly">월간</string>
+    <string name="report_top10">POOP 순위</string>
+    <string name="report_top10_standard">(최근 일주일)</string>
+    <string name="report_pattern">배변 패턴 분석</string>
+    <string name="report_pattern_date">당신의 장이 가장 활발한 요일은?</string>
+    <string name="report_poop_count_desc">이만큼이나...</string>
+    <string name="report_poop_top10_desc">명예의 전당에 오른 최강의 변기워리어는?</string>
+    <string name="report_mon">월요일</string>
+    <string name="report_tue">화요일</string>
+    <string name="report_wed">수요일</string>
+    <string name="report_thu">목요일</string>
+    <string name="report_fri">금요일</string>
+    <string name="report_sat">토요일</string>
+    <string name="report_sun">일요일</string>
 
     <!--onboarding-->
     <string name="onboarding_skip">SKIP</string>
