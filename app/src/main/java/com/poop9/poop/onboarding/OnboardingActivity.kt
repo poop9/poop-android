@@ -4,16 +4,16 @@ import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.tabs.TabLayout
 import com.poop9.poop.MainActivity
 import com.poop9.poop.R
+import com.poop9.poop.base.BaseActivity
 import com.poop9.poop.startActivity
 import kotlinx.android.synthetic.main.activity_onboarding.*
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 
-class OnboardingActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
+class OnboardingActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
 
     companion object {
         const val LOCATION_PERMISSION_REQUEST_CODE = 1

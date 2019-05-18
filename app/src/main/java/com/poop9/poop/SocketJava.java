@@ -1,25 +1,18 @@
 package com.poop9.poop;
 
-import android.app.Activity;
 import android.icu.text.AlphabeticIndex;
 import android.os.Bundle;
-import android.text.TextUtils;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.AxisBase;
-import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
+import com.poop9.poop.base.BaseActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -27,9 +20,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.security.AccessController.getContext;
-
-public class SocketJava extends Activity {
+public class SocketJava extends BaseActivity {
 
     private int[] layoutIds = {
             R.layout.fragment_onboarding,

@@ -1,17 +1,17 @@
 package com.poop9.poop
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.github.nkzawa.emitter.Emitter
 import com.github.nkzawa.socketio.client.IO
 import com.github.nkzawa.socketio.client.Socket
+import com.poop9.poop.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_socket.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.net.URISyntaxException
 
 
-class SocketActivity : AppCompatActivity() {
+class SocketActivity : BaseActivity() {
 
     private var mSocket: Socket? = null
 
