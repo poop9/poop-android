@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -19,11 +20,17 @@ import com.poop9.poop.model.LocationData
 import pub.devrel.easypermissions.EasyPermissions
 import com.poop9.poop.MainActivity
 import com.poop9.poop.R
+import com.poop9.poop.data.api.PoopRepository
 import kotlinx.android.synthetic.main.fragment_map.*
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 
 
 @SuppressLint("MissingPermission")
 class MapFragment : BaseFragment() {
+
+    private val repo: PoopRepository by inject()
+
     override val layoutId: Int
         get() = R.layout.fragment_map
 
@@ -68,9 +75,8 @@ class MapFragment : BaseFragment() {
         vm.location.observe(this) { locationData ->
             loadMap(locationData)
         }
-        binding.poopStartFab.setOnClickListener{screenTouch()}
-
-        map_screen.setOnClickListener{screenTouch()}
+            binding.poopStartFab.setOnClickListener{screenTouch()}
+            map_screen.setOnClickListener{screenTouch()}
     }
 
     private fun activate() {
@@ -130,7 +136,8 @@ class MapFragment : BaseFragment() {
 
     private fun screenTouch(){
         val activity = activity as MainActivity
-        activity.attemptSend()
+        lifecycleScope.launch {
+            activity.attemptSend2() }
     }
 
     private fun makeRandomRange() = Math.random() * 0.02 - 0.01

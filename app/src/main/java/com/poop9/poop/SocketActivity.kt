@@ -1,39 +1,35 @@
 package com.poop9.poop
 
 import android.os.Bundle
+import android.util.Log
 import com.github.nkzawa.emitter.Emitter
 import com.github.nkzawa.socketio.client.IO
 import com.github.nkzawa.socketio.client.Socket
 import com.poop9.poop.base.BaseActivity
-import com.poop9.poop.data.request.SignInRequest
+import com.poop9.poop.data.api.PoopRepository
+import com.poop9.poop.data.request.SocketRequest
 import org.json.JSONException
 import org.json.JSONObject
+import org.koin.android.ext.android.inject
 import java.net.URISyntaxException
-import java.util.*
 
 
 open class SocketActivity : BaseActivity() {
+    private val repo: PoopRepository by inject()
 
     private var mSocket: Socket? = null
 
-    init {
-        try {
-            mSocket = IO.socket("https://poop-server.herokuapp.com/")
-        } catch (e: URISyntaxException) {
-        }
-
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mSocket = IO.socket("https://poop-server.herokuapp.com/")
 
         //socket connect
         mSocket!!.connect()
 //        mSocket!!.on("new%20message", onNewMessage)
-        mSocket!!.on("new message", onShowMessagessss)
+        mSocket!!.on("newmessage", messageReceiver)
     }
 
-    private val onShowMessagessss = Emitter.Listener {
+    private val messageReceiver = Emitter.Listener {
         run {
             this@SocketActivity.runOnUiThread {
                 toast("poop!")
@@ -62,20 +58,36 @@ open class SocketActivity : BaseActivity() {
     private fun addMessage(username: String, message: String){
 //        socket_test_text.text = String.format("%s :%s",username,message)
         toast("poop!")
-
     }
 
     //emitting message
-    fun attemptSend() {
+    suspend fun attemptSend() {
         toast("yo!")
-        mSocket!!.emit("new message", SignInRequest(UUID.randomUUID().toString() , "yo!"))
+        mSocket!!.emit("newmessage", SocketRequest(repo.getToken() , "yo!"))
+    }
+
+    suspend fun attemptSend2(){
+        /*
+        toast("yo!")
+        val data = JSONObject()
+        try {
+            data.put("token", repo.getToken())
+            data.put("message", "yo!")
+            mSocket!!.emit("new message", data)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        */
+
+
+
+
     }
 
     public override fun onDestroy() {
         super.onDestroy()
 
         mSocket!!.disconnect()
-//        mSocket!!.off("new message", onNewMessage)
-        mSocket!!.off("new message", onShowMessagessss)
+        mSocket!!.off("new message", messageReceiver)
     }
 }

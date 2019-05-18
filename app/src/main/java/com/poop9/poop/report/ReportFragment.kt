@@ -64,20 +64,21 @@ class ReportFragment : Fragment() {
 
     private suspend fun mockRankList(): List<RankData> {
 
-        val list = listOf(
-            RankData(1, "GROOT1", 100)
-            , RankData(2, "GROOT", 100)
-            , RankData(3, "GROOT", 100)
-            , RankData(4, "GROOT", 100)
-            , RankData(5, "GROOT", 100)
-            , RankData(6, "GROOT", 100)
-            , RankData(7, "GROOT", 100)
-            , RankData(8, "GROOT", 100)
-            , RankData(9, "GROOT", 100)
-            , RankData(10, "ALAN", 100)
-        )
+//        val list = listOf(
+//            RankData(1, "GROOT1", 100)
+//            , RankData(2, "GROOT", 100)
+//            , RankData(3, "GROOT", 100)
+//            , RankData(4, "GROOT", 100)
+//            , RankData(5, "GROOT", 100)
+//            , RankData(6, "GROOT", 100)
+//            , RankData(7, "GROOT", 100)
+//            , RankData(8, "GROOT", 100)
+//            , RankData(9, "GROOT", 100)
+//            , RankData(10, "ALAN", 100)
+//        )
+
         return repo.list().map { response ->
-            RankData(response.rank, response.nickname, response.count)
+            RankData(response.num, response.nickname, response.count)
         }
     }
 
