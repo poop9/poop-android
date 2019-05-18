@@ -2,11 +2,13 @@ package com.poop9.poop
 
 import android.app.Activity
 import android.content.Intent
+import android.util.Log
 import android.widget.Toast
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
@@ -47,7 +49,12 @@ fun FragmentActivity.replaceWhen(
 fun FragmentActivity.replace(@IdRes containerId: Int, fragment: Fragment) {
     supportFragmentManager.beginTransaction()
         .replace(containerId, fragment)
+        .setCustomAnimations(R.anim.fade_start, R.anim.fade_end, R.anim.fade_start, R.anim.fade_end)
         .commitNow()
+}
+fun FragmentActivity.showDialogFragment(dialog: DialogFragment, tag: String) {
+    dialog.isCancelable = false
+    dialog.show(supportFragmentManager, tag)
 }
 
 fun Activity.toast(message: String, duration: Int = Toast.LENGTH_SHORT) {

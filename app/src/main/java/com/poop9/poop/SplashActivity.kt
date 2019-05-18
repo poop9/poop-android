@@ -11,7 +11,6 @@ class SplashActivity : BaseActivity() {
 
     private val timeNum = 2 //2초
     private val timeSec = timeNum * 1000
-    private var clicked = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

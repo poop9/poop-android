@@ -4,6 +4,7 @@
     <string name="menu_map">맵</string>
     <string name="menu_report">리포트</string>
 
+    <!--report-->
     <string name="report_title">통계</string>
     <string name="report_title_semi">POOP 횟수</string>
     <string name="report_daily">일간</string>
@@ -22,6 +23,10 @@
     <string name="report_fri">금요일</string>
     <string name="report_sat">토요일</string>
     <string name="report_sun">일요일</string>
+
+    <!--login-->
+    <string name="login_title">앞으로 사용할\n닉네임을 입력해주세요.</string>
+    <string name="GO">GO!</string>
 
     <!--onboarding-->
     <string name="onboarding_skip">SKIP</string>
