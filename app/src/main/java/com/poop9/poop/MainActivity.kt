@@ -12,7 +12,7 @@ import com.poop9.poop.report.ReportFragment
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
-class MainActivity : BaseActivity() {
+class MainActivity : SocketActivity() {
 
     private val repo: PoopRepository by inject()
 

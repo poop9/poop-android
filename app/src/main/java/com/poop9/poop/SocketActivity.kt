@@ -11,7 +11,7 @@ import org.json.JSONObject
 import java.net.URISyntaxException
 
 
-class SocketActivity : BaseActivity() {
+open class SocketActivity : BaseActivity() {
 
     private var mSocket: Socket? = null
 
