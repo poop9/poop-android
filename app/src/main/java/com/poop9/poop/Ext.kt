@@ -2,6 +2,7 @@ package com.poop9.poop
 
 import android.app.Activity
 import android.content.Intent
+import android.widget.Toast
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
@@ -43,4 +44,8 @@ fun FragmentActivity.replace(@IdRes containerId: Int, fragment: Fragment) {
     supportFragmentManager.beginTransaction()
         .replace(containerId, fragment)
         .commitNow()
+}
+
+fun Activity.toast(message: String, duration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(this, message, duration).show()
 }
