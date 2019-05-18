@@ -8,4 +8,14 @@
     <string name="report_title_semi">POOP 횟수</string>
     <string name="report_weekly">주간</string>
     <string name="report_monthly">월간</string>
+
+    <!--onboarding-->
+    <string name="onboarding_skip">SKIP</string>
+    <string name="onboarding_start">START</string>
+    <string name="onboarding_title0">배가 아프신가요?</string>
+    <string name="onboarding_desc0">당신은 당장 변기에 앉아\nPOOP을 킨뒤 상대방에게\nPOOP을 날리세요!</string>
+    <string name="onboarding_title1">POOP을 눌러보세요</string>
+    <string name="onboarding_desc1">다른 사용자에게 POOP 버튼을\n통하여 POOP을 선사해주세요!</string>
+    <string name="onboarding_title2">GPS를 켜주세요</string>
+    <string name="onboarding_desc2">실시간 화장실 장소 정보를 받아오기\n위해 GPS 정보가 반드시 필요합니다.\nGPS를 켜주세요!</string>
 </resources>
