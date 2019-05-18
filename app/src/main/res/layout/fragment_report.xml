@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--top bar-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:background="@color/lightish_blue"
+        app:elevation="4dp">
+        <TextView
+            android:id="@+id/report_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/report_title"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/report_title_semi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/report_title_semi"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:layout_marginTop="28dp"/>
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/report_chart_00"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/report_title_weekly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/report_weekly"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:layout_marginTop="36dp"/>
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/report_chart_01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/report_title_monthly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/report_monthly"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:layout_marginTop="36dp"/>
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/report_chart_02"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
