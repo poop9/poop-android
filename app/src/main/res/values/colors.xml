@@ -4,9 +4,12 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="lightish_blue">#416cf7</color>
-    <color name="black">#000000</color>
-    <color name="white">#ffffff</color>
+    <!--general-->
+    <color name="white">#FFFFFF</color>
     <color name="white_12">#1fffffff</color>
+    <color name="black">#000000</color>
     <color name="black_24">#3d000000</color>
+
+    <!--common-->
+    <color name="lightish_blue">#416cf7</color>
 </resources>
