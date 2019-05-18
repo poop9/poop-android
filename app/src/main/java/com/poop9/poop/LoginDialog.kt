@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import kotlinx.android.synthetic.main.fragment_login.*
 
-class LoginDialog : DialogFragment(), Dimm{
+class LoginDialog : DialogFragment(), Dimm {
+
+    private var listener: (String) -> Unit = {}
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -16,18 +18,18 @@ class LoginDialog : DialogFragment(), Dimm{
         return inflater.inflate(R.layout.fragment_login, null)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        login_go.setOnClickListener{loginSubmit()}
+        login_go.setOnClickListener {
+            val nickname = login_edit.text.toString()
+            listener(nickname)
+            dismiss()
+        }
     }
 
-    private fun loginSubmit(){
-        val nickname = login_edit.text.toString()
-
-        //TODO: SAVE NICKNAME
-
-        dismiss()
+    fun onLogin(listener: (String) -> Unit): LoginDialog {
+        this.listener = listener
+        return this
     }
 }

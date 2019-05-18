@@ -1,7 +1,8 @@
 package com.poop9.poop.data.api
 
 import com.poop9.poop.data.request.SignInRequest
-import com.poop9.poop.data.response.SignInResponse
+import com.poop9.poop.data.response.Response
+import com.poop9.poop.data.response.TokenResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -13,10 +14,10 @@ interface PoopService {
     @POST("api/sign-in")
     fun signIn(
         @Body request: SignInRequest
-    ): Deferred<SignInResponse>
+    ): Deferred<Response<TokenResponse>>
 
     @POST("api/sign-up")
     fun signUp(
         @Body request: SignInRequest
-    ): Deferred<SignInResponse>
+    ): Deferred<Response<TokenResponse>>
 }

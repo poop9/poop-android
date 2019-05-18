@@ -7,7 +7,7 @@ import retrofit2.CallAdapter
 object PoopServiceProvider : ServiceProvider(BuildConfig.DEBUG) {
 
     // TODO: Endpoint
-    override fun provideBaseUrl(): String = ""
+    override fun provideBaseUrl(): String = "https://poop-server.herokuapp.com/"
 
     override fun provideCallAdapterFactory(): CallAdapter.Factory = CoroutineCallAdapterFactory()
 

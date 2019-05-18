@@ -1,7 +1,7 @@
 package com.poop9.poop.data.api
 
 import com.poop9.poop.data.request.SignInRequest
-import com.poop9.poop.data.response.SignInResponse
+import com.poop9.poop.data.response.TokenResponse
 import java.util.*
 
 class PoopRepositoryImpl(
@@ -9,7 +9,7 @@ class PoopRepositoryImpl(
 ) : PoopRepository {
     private var nickname: String = ""
 
-    override suspend fun signUp(nickname: String): SignInResponse {
+    override suspend fun signUp(nickname: String): TokenResponse {
         this.nickname = nickname
 
         return service.signIn(
@@ -17,10 +17,10 @@ class PoopRepositoryImpl(
                 UUID.randomUUID().toString(),
                 nickname
             )
-        ).await()
+        ).await().result
     }
 
-    override suspend fun signIn(): SignInResponse {
+    override suspend fun signIn(): TokenResponse {
         if (nickname.isEmpty())
             throw IllegalStateException("Should sign up first.")
 
@@ -29,6 +29,6 @@ class PoopRepositoryImpl(
                 UUID.randomUUID().toString(),
                 nickname
             )
-        ).await()
+        ).await().result
     }
 }
