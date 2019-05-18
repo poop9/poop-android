@@ -46,9 +46,9 @@ class OnboardingActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
     open fun onboardingSkip(){
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         startActivity(intent)
         finish()
+        overridePendingTransition(R.anim.fade_start, R.anim.fade_end)
     }
 
     @AfterPermissionGranted(LOCATION_PERMISSION_REQUEST_CODE)
