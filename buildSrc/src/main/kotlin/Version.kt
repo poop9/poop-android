@@ -4,4 +4,6 @@ object Version {
 
     val material = "1.1.0-alpha05"
     val supportLibraryVersion = "28.0.0"
+
+    val lifecycle = "2.2.0-alpha01"
 }

@@ -32,4 +32,7 @@
     <string name="onboarding_desc1">다른 사용자에게 POOP 버튼을\n통하여 POOP을 선사해주세요!</string>
     <string name="onboarding_title2">GPS를 켜주세요</string>
     <string name="onboarding_desc2">실시간 화장실 장소 정보를 받아오기\n위해 GPS 정보가 반드시 필요합니다.\nGPS를 켜주세요!</string>
+
+    <!--map-->
+    <string name="map_label_me">Me</string>
 </resources>

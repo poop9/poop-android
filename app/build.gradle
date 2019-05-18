@@ -37,6 +37,12 @@ dependencies {
     implementation "com.android.support:animated-vector-drawable:${Version.supportLibraryVersion}"
     implementation "com.google.android.material:material:${Version.material}"
 
+
+    implementation "androidx.lifecycle:lifecycle-extensions:${Version.lifecycle}"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${Version.lifecycle}"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:${Version.lifecycle}"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:${Version.lifecycle}"
+
     // For developers using AndroidX in their applications
     implementation "pub.devrel:easypermissions:3.0.0"
 
