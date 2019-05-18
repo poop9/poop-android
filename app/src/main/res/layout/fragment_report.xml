@@ -39,12 +39,24 @@
                 android:text="@string/report_title_semi"
                 android:textColor="@color/black"
                 android:textSize="24sp"
+                android:textStyle="bold"
                 android:layout_marginTop="28dp"/>
-
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/report_chart_00"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/report_title_daily"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/report_daily"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginTop="24dp"/>
+            <TextView
+                android:id="@+id/report_title_daily_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="100회"
+                android:textColor="@color/lightish_blue"
+                android:textSize="32sp"
+                android:layout_marginTop="4dp"/>
 
             <TextView
                 android:id="@+id/report_title_weekly"
@@ -53,13 +65,15 @@
                 android:text="@string/report_weekly"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:layout_marginTop="36dp"/>
-
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/report_chart_01"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
+                android:layout_marginTop="24dp"/>
+            <TextView
+                android:id="@+id/report_title_weekly_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="100회"
+                android:textColor="@color/lightish_blue"
+                android:textSize="32sp"
+                android:layout_marginTop="4dp"/>
             <TextView
                 android:id="@+id/report_title_monthly"
                 android:layout_width="wrap_content"
@@ -67,12 +81,42 @@
                 android:text="@string/report_monthly"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:layout_marginTop="36dp"/>
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/report_chart_02"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_marginTop="24dp"/>
+            <TextView
+                android:id="@+id/report_title_monthly_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="100회"
+                android:textColor="@color/lightish_blue"
+                android:textSize="32sp"
+                android:layout_marginTop="4dp"/>
 
+            <TextView
+                android:id="@+id/report_title_pattern"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/report_pattern"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginTop="40dp"/>
+            <TextView
+                android:id="@+id/report_title_pattern_question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/report_pattern_date"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"/>
+            <TextView
+                android:id="@+id/report_title_pattern_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="수요일"
+                android:textColor="@color/lightish_blue"
+                android:textSize="32sp"
+                android:layout_marginTop="10dp"
+                android:paddingBottom="50dp"/>
 
             <TextView
                 android:id="@+id/report_title_top10"
@@ -81,31 +125,13 @@
                 android:text="@string/report_top10"
                 android:textColor="@color/black"
                 android:textSize="24sp"
+                android:textStyle="bold"
                 android:layout_marginTop="28dp"/>
-            <TextView
-                android:id="@+id/report_title_pattern"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/report_pattern"
-                android:textColor="@color/black"
-                android:textSize="24sp"
-                android:layout_marginTop="28dp"/>
-            <TextView
-                android:id="@+id/report_title_pattern_question"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/report_pattern_date"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:layout_marginTop="15dp"/>
-            <TextView
-                android:id="@+id/report_title_pattern_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="수요일"
-                android:textColor="@color/lightish_blue"
-                android:textSize="32sp"
-                android:layout_marginTop="10dp"/>
+            <ListView
+                android:id="@+id/report_rank_list"
+                android:layout_width="match_parent"
+                android:layout_height="480dp"
+                android:layout_marginTop="24dp"/>
         </LinearLayout>
 
     </LinearLayout>

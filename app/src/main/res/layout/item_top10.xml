@@ -5,17 +5,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="30dp">
+    android:layout_height="45dp"
+    android:layout_marginTop="4dp">
 
     <ImageView
         android:id="@+id/item_top10_medal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:src="@drawable/gold-medal"
-        android:visibility="invisible"/>
+        android:src="@drawable/gold_medal"/>
 
     <TextView
         android:id="@+id/item_top10_rank"
@@ -29,8 +29,23 @@
         app:layout_constraintRight_toRightOf="@+id/item_top10_medal"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:src="@drawable/gold-medal"/>
+        tools:src="@drawable/gold_medal"
+        android:visibility="invisible"
+        tools:visibility="visible"/>
 
+    <com.romainpiel.shimmer.ShimmerTextView
+        android:id="@+id/item_top10_nick_shimmer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/black_2C"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="32dp"
+        tools:text="해양심층수"
+        android:visibility="invisible"/>
     <TextView
         android:id="@+id/item_top10_nick"
         android:layout_width="wrap_content"
@@ -56,7 +71,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/slate_grey"
+        android:layout_height="0.5dp"
+        android:background="@color/black_15"
         app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
