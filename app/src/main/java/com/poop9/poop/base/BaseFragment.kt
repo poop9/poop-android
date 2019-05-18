@@ -1,16 +1,17 @@
-package com.poop9.poop
+package com.poop9.poop.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 
-/**
- * 그냥 더미
- */
-class DummyFragment : Fragment() {
+abstract class BaseFragment : Fragment() {
+    abstract val layoutId: Int
+        @LayoutRes get
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_dummy, container, false)
+        return inflater.inflate(layoutId, container, false)
     }
 }

@@ -14,3 +14,5 @@ build
 $RECYCLE.BIN/
 
 !.idea/codeStyles
+
+secret.xml

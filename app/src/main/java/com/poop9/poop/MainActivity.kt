@@ -13,6 +13,8 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigation.setOnNavigationItemSelectedListener(this::handleMenuItemSelected)
         binding.bottomNavigation.setOnNavigationItemReselectedListener {} // For prevent recreating fragments
+
+        showMapFragment()
     }
 
     private fun handleMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -26,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showMapFragment() {
-        replace(R.id.fragment_container, DummyFragment())
+        replace(R.id.fragment_container, MapFragment())
     }
 
     private fun showReportFragment() {

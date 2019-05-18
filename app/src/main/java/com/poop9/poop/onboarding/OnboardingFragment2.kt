@@ -6,16 +6,29 @@ import androidx.core.content.ContextCompat
 import com.poop9.poop.R
 import kotlinx.android.synthetic.main.fragment_onboarding.*
 
-class OnboardingFragment2 : OnboardingFragment(){
+class OnboardingFragment2 : OnboardingFragment() {
+
+    private var onStartListener: () -> Unit = {}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        onboarding_image.setImageDrawable(ContextCompat.getDrawable(context!!,
-            R.drawable.onboarding_3_illust
-        ))
+        onboarding_image.setImageDrawable(
+            ContextCompat.getDrawable(
+                context!!,
+                R.drawable.onboarding_3_illust
+            )
+        )
         onboarding_title.text = getString(R.string.onboarding_title2)
         onboarding_desc.text = getString(R.string.onboarding_desc2)
         onboarding_start.visibility = View.VISIBLE
+
+        onboarding_start.setOnClickListener {
+            onStartListener()
+        }
+    }
+
+    fun attachOnStartListener(listener: () -> Unit) {
+        onStartListener = listener
     }
 }
