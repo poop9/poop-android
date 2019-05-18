@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import androidx.lifecycle.lifecycleScope
-import com.poop9.poop.base.BaseActivity
 import com.poop9.poop.data.api.PoopRepository
 import com.poop9.poop.databinding.ActivityMainBinding
 import com.poop9.poop.map.MapFragment
@@ -24,7 +23,8 @@ class MainActivity : SocketActivity() {
         binding.bottomNavigation.setOnNavigationItemReselectedListener {} // For prevent recreating fragments
 
         showMapFragment()
-        showLoginDialog()
+
+        showLoginDialogWhenFirst()
     }
 
     private fun handleMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -35,6 +35,10 @@ class MainActivity : SocketActivity() {
         }
 
         return true
+    }
+
+    private fun showLoginDialogWhenFirst() {
+        showLoginDialog()
     }
 
     private fun showLoginDialog() {

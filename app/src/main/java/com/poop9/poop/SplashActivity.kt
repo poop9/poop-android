@@ -2,12 +2,18 @@ package com.poop9.poop
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
+import androidx.lifecycle.lifecycleScope
 import com.poop9.poop.base.BaseActivity
+import com.poop9.poop.data.api.PoopRepository
 import com.poop9.poop.onboarding.OnboardingActivity
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 
 
 class SplashActivity : BaseActivity() {
+
+    private val repo: PoopRepository by inject()
 
     private val timeNum = 2 //2초
     private val timeSec = timeNum * 1000
@@ -16,23 +22,17 @@ class SplashActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        startCountdown()
-    }
-
-    private fun startCountdown() {
-        val handler = Handler()
-        handler.postDelayed(splashHandler(), timeSec.toLong())
-    }
-
-    private inner class splashHandler : Runnable {
-        override fun run() {
+        lifecycleScope.launch {
+            delay(timeSec.toLong())
             gotoOnboarding()
         }
     }
-    private fun gotoOnboarding(){
-        val intent = Intent(this, OnboardingActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        startActivity(intent)
+
+    private fun gotoOnboarding() {
+        startActivity<OnboardingActivity> {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        }
+
         finish()
         overridePendingTransition(R.anim.fade_start, R.anim.fade_end)
     }

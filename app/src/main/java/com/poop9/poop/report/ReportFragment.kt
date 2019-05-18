@@ -11,8 +11,6 @@ import com.poop9.poop.data.api.PoopRepository
 import com.poop9.poop.vo.RankData
 import kotlinx.android.synthetic.main.fragment_report.*
 import org.koin.android.ext.android.inject
-import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
 
 
 class ReportFragment : Fragment() {
@@ -33,10 +31,14 @@ class ReportFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         lifecycleScope.launchWhenStarted {
-            loadChart()
-            loadRankList()
-            loadBestActivePoop()
+            try {
+                loadChart()
+                loadRankList()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
+        loadBestActivePoop()
     }
 
     private suspend fun loadChart() {
@@ -83,7 +85,7 @@ class ReportFragment : Fragment() {
     }
 
     private fun mockActivePoopDay(): String {
-        return "WED"
+        return "SUN"
     }
 
 

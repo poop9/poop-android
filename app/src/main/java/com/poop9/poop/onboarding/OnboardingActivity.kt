@@ -43,7 +43,7 @@ class OnboardingActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
         tabLayout.setupWithViewPager(onboarding_viewpager)
     }
 
-    open fun onboardingSkip(){
+    private fun onboardingSkip(){
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)

@@ -1,10 +1,12 @@
 package com.poop9.poop.data.api
 
 import android.content.SharedPreferences
+import com.poop9.poop.data.request.GpsRequest
 import com.poop9.poop.data.request.SignInRequest
 import com.poop9.poop.data.response.ReportCountResponse
 import com.poop9.poop.data.response.ReportRankResponse
 import com.poop9.poop.data.response.TokenResponse
+import com.poop9.poop.model.LocationData
 import java.util.*
 
 class PoopRepositoryImpl(
@@ -21,6 +23,10 @@ class PoopRepositoryImpl(
         return token()
     }
 
+    private fun token(): String {
+        return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiMmY0OGYyNDEtOWQ2NC00ZDE2LWJmNTYtNzBiOWQ0ZTBlNzlhIiwibmlja25hbWUiOiJoZWV3b24iLCJpYXQiOjE1NTgyMDQ0NDUsImV4cCI6MTU2MDc5NjQ0NX0.emRjXgTMuD5hT58l55G5D0muzozIEDjmcGIUX3ax5cQ"
+    }
+
     override suspend fun today(): ReportCountResponse {
         return service.today(token()).await().result
     }
@@ -34,7 +40,7 @@ class PoopRepositoryImpl(
     }
 
     override suspend fun list(): List<ReportRankResponse> {
-        return service.list(token()).await().result
+        return service.list(token()).await()
     }
 
     override suspend fun signUp(nickname: String): TokenResponse {
@@ -66,7 +72,13 @@ class PoopRepositoryImpl(
         ).await().result
     }
 
-    private fun token(): String {
-        return pref.getString(KEY_TOKEN, "")
+    override suspend fun gps(locationData: LocationData) {
+        service.gps(
+            GpsRequest(
+                locationData.latitude,
+                locationData.longitude
+            ),
+            token()
+        ).await()
     }
 }
