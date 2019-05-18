@@ -4,7 +4,6 @@ import android.content.SharedPreferences
 import com.poop9.poop.data.request.SignInRequest
 import com.poop9.poop.data.response.ReportCountResponse
 import com.poop9.poop.data.response.ReportRankResponse
-import com.poop9.poop.data.response.SignInResponse
 import com.poop9.poop.data.response.TokenResponse
 import java.util.*
 
@@ -19,34 +18,35 @@ class PoopRepositoryImpl(
     }
 
     override suspend fun today(): ReportCountResponse {
-        return service.today().await().result
+        return service.today(token()).await().result
     }
 
     override suspend fun week(): ReportCountResponse {
-        return service.week().await().result
+        return service.week(token()).await().result
     }
 
     override suspend fun month(): ReportCountResponse {
-        return service.month().await().result
+        return service.month(token()).await().result
     }
 
-    override suspend fun list() : List<ReportRankResponse>{
-        return service.list().await().result
+    override suspend fun list(): List<ReportRankResponse> {
+        return service.list(token()).await().result
     }
-
-    private var nickname: String = ""
 
     override suspend fun signUp(nickname: String): TokenResponse {
-        pref.edit()
-            .putString(KEY_NICKNAME, nickname)
-            .apply()
-
-        return service.signIn(
+        val token = service.signIn(
             SignInRequest(
                 UUID.randomUUID().toString(),
                 nickname
             )
         ).await().result
+
+        pref.edit()
+            .putString(KEY_NICKNAME, nickname)
+            .putString(KEY_TOKEN, token.token)
+            .apply()
+
+        return token
     }
 
     override suspend fun signIn(): TokenResponse {
@@ -60,5 +60,9 @@ class PoopRepositoryImpl(
                 nickname
             )
         ).await().result
+    }
+
+    private fun token(): String {
+        return pref.getString(KEY_TOKEN, "")
     }
 }

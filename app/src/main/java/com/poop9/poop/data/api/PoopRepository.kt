@@ -2,7 +2,6 @@ package com.poop9.poop.data.api
 
 import com.poop9.poop.data.response.ReportCountResponse
 import com.poop9.poop.data.response.ReportRankResponse
-import com.poop9.poop.data.response.SignInResponse
 import com.poop9.poop.data.response.TokenResponse
 
 interface PoopRepository {

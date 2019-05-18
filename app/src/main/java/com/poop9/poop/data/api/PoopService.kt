@@ -8,6 +8,7 @@ import com.poop9.poop.data.response.TokenResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 /**
@@ -25,14 +26,22 @@ interface PoopService {
     ): Deferred<Response<TokenResponse>>
 
     @GET("api/today")
-    fun today(): Deferred<Response<ReportCountResponse>>
+    fun today(
+        @Header("authorization") authorization: String
+    ): Deferred<Response<ReportCountResponse>>
 
     @GET("api/month")
-    fun month(): Deferred<Response<ReportCountResponse>>
+    fun month(
+        @Header("authorization") authorization: String
+    ): Deferred<Response<ReportCountResponse>>
 
     @GET("api/week")
-    fun week(): Deferred<Response<ReportCountResponse>>
+    fun week(
+        @Header("authorization") authorization: String
+    ): Deferred<Response<ReportCountResponse>>
 
     @GET("api/list")
-    fun list(): Deferred<Response<List<ReportRankResponse>>>
+    fun list(
+        @Header("authorization") authorization: String
+    ): Deferred<Response<List<ReportRankResponse>>>
 }
