@@ -1,17 +1,15 @@
 package com.poop9.poop.data.api
 
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.poop9.poop.BuildConfig
-import io.reactivex.schedulers.Schedulers
 import retrofit2.CallAdapter
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 
 object PoopServiceProvider : ServiceProvider(BuildConfig.DEBUG) {
 
     // TODO: Endpoint
     override fun provideBaseUrl(): String = ""
 
-    override fun provideCallAdapterFactory(): CallAdapter.Factory = RxJava2CallAdapterFactory
-        .createWithScheduler(Schedulers.io())
+    override fun provideCallAdapterFactory(): CallAdapter.Factory = CoroutineCallAdapterFactory()
 
     val service: PoopService by lazy { provideService(PoopService::class) }
 }

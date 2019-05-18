@@ -1,5 +1,6 @@
 object Version {
     val kotlin = "1.3.31"
+    val coroutine = "1.2.1"
     val constraintLayout = "1.1.3"
 
     val material = "1.1.0-alpha05"
