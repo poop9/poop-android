@@ -72,6 +72,7 @@ class ReportRankAdapter(private val context: Context,
                 top10Rank.text = Integer.toString(data.rank)
             }
         }
+        top10Rank.text = String.format("%s", position+1)
         top10Nick.text = data.nickname
         top10Count.text = String.format("(%s회)", data.count)
         return rowView
