@@ -40,8 +40,8 @@ class ReportRankAdapter(private val context: Context,
         val top10NickShimmer = rowView.findViewById(R.id.item_top10_nick_shimmer) as ShimmerTextView
 
         val data = getItem(position) as RankData
-        when(data.rank){
-            1->{
+        when(position){
+            0->{
                 top10Medal.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.gold_medal))
                 val shimmer = Shimmer()
                 top10Nick.visibility = View.INVISIBLE
@@ -50,7 +50,7 @@ class ReportRankAdapter(private val context: Context,
                 top10NickShimmer.textSize = 20f
                 shimmer.start(top10NickShimmer)
             }
-            2->{
+            1->{
                 top10Medal.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.silver_medal))
                 val shimmer = Shimmer()
                 top10Nick.visibility = View.INVISIBLE
@@ -58,7 +58,7 @@ class ReportRankAdapter(private val context: Context,
                 top10NickShimmer.text = data.nickname
                 shimmer.start(top10NickShimmer)
             }
-            3->{
+            2->{
                 top10Medal.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.bronze_medal))
                 val shimmer = Shimmer()
                 top10Nick.visibility = View.INVISIBLE
@@ -72,6 +72,7 @@ class ReportRankAdapter(private val context: Context,
                 top10Rank.text = Integer.toString(data.rank)
             }
         }
+        top10Rank.text = String.format("%s", position+1)
         top10Nick.text = data.nickname
         top10Count.text = String.format("(%s회)", data.count)
         return rowView

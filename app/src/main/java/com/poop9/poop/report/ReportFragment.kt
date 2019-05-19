@@ -34,11 +34,11 @@ class ReportFragment : Fragment() {
             try {
                 loadChart()
                 loadRankList()
+                loadBestActivePoop()
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
-        loadBestActivePoop()
     }
 
     private suspend fun loadChart() {

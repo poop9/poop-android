@@ -23,8 +23,10 @@ class LoginDialog : DialogFragment(), Dimm {
 
         login_go.setOnClickListener {
             val nickname = login_edit.text.toString()
-            listener(nickname)
-            dismiss()
+            if(nickname != ""){
+                listener(nickname)
+                dismiss()
+            }
         }
     }
 
