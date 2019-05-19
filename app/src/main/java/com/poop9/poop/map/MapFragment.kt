@@ -102,8 +102,8 @@ class MapFragment : BaseFragment() {
             if (activate) {
                 screenTouch()
                 for (i in 1..10) {
-                    showPoopText()}
-                showPoopImage()
+                    showPoopImage()}
+                showPoopText()
             }
 
         }
