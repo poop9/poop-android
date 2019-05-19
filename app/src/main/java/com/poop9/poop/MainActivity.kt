@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import androidx.lifecycle.lifecycleScope
+import com.github.nkzawa.emitter.Emitter
 import com.poop9.poop.data.api.PoopRepository
+import com.poop9.poop.data.request.SocketRequest
 import com.poop9.poop.databinding.ActivityMainBinding
 import com.poop9.poop.map.MapFragment
 import com.poop9.poop.report.ReportFragment
@@ -27,6 +29,17 @@ class MainActivity : SocketActivity() {
         lifecycleScope.launch {
             showLoginDialogWhenFirst()
         }
+
+        mSocket.on(EVENT_NAME, messageReceiver)
+    }
+
+    private val messageReceiver = Emitter.Listener { item ->
+        Log.e("asdf", "received")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mSocket.off(EVENT_NAME, messageReceiver)
     }
 
     private fun handleMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -42,6 +55,17 @@ class MainActivity : SocketActivity() {
     private suspend fun showLoginDialogWhenFirst() {
         if (repo.getToken().isEmpty())
             showLoginDialog()
+    }
+
+    fun sendPoop() {
+        toast("보내Yo!")
+        mSocket.emit(EVENT_NAME, "Message")
+        repo.addPoopCount()
+    }
+
+    suspend fun attemptSend() {
+        toast("yo!")
+        mSocket.emit(EVENT_NAME, SocketRequest(repo.getToken(), "yo!"))
     }
 
     private fun showLoginDialog() {

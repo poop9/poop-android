@@ -15,4 +15,5 @@ interface PoopRepository {
     suspend fun list(): List<ReportRankResponse>
 
     suspend fun gps(locationData: LocationData)
+    fun addPoopCount()
 }

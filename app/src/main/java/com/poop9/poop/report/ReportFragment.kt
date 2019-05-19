@@ -89,13 +89,15 @@ class ReportFragment : Fragment() {
     }
 
 
-    private suspend fun valueDaily(): Int{
+    private suspend fun valueDaily(): Int {
         return repo.today().count
     }
-    private suspend fun valueWeekly(): Int{
+
+    private suspend fun valueWeekly(): Int {
         return repo.week().count
     }
-    private suspend fun valueMonthly(): Int{
+
+    private suspend fun valueMonthly(): Int {
         return repo.month().count
     }
 

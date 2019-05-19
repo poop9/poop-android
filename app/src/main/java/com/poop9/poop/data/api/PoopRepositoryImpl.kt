@@ -29,15 +29,27 @@ class PoopRepositoryImpl(
     }
 
     override suspend fun today(): ReportCountResponse {
-        return service.today(token()).await().result
+        return service.today(token()).await().result.let {
+            it.copy(count = it.count + count)
+        }
+    }
+
+    private var count: Int = 0
+
+    override fun addPoopCount() {
+        count++
     }
 
     override suspend fun week(): ReportCountResponse {
-        return service.week(token()).await().result
+        return service.week(token()).await().result.let {
+            it.copy(count = it.count + count)
+        }
     }
 
     override suspend fun month(): ReportCountResponse {
-        return service.month(token()).await().result
+        return service.month(token()).await().result.let {
+            it.copy(count = it.count + count)
+        }
     }
 
     override suspend fun list(): List<ReportRankResponse> {

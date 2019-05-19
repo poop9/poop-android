@@ -2,7 +2,6 @@ package com.poop9.poop.map
 
 import android.annotation.SuppressLint
 import android.location.Location
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -43,7 +42,6 @@ class MapViewModel : ViewModel() {
     fun sendGpsData() {
         viewModelScope.launch {
             lastLocation {
-                Log.e("asdf", "location: $it")
                 _sendGpsData.postValue(it)
             }
         }

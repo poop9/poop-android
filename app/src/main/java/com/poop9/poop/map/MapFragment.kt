@@ -100,13 +100,18 @@ class MapFragment : BaseFragment() {
 
         map_screen.setOnClickListener {
             if (activate) {
-                screenTouch()
+                sendPoop()
                 for (i in 1..10) {
                     showPoopImage()}
                 showPoopText()
             }
 
         }
+    }
+
+    private fun sendPoop() {
+        val activity = activity as MainActivity
+        activity.sendPoop()
     }
 
     private fun activate() {
@@ -230,13 +235,6 @@ class MapFragment : BaseFragment() {
             }
             // All the other override functions
         })
-    }
-
-    private fun screenTouch() {
-        val activity = activity as MainActivity
-        lifecycleScope.launch {
-            activity.attemptSend2()
-        }
     }
 
     private fun makeRandomRange() = Math.random() * 0.02 - 0.01
